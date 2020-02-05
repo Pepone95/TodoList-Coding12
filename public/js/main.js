@@ -37,7 +37,7 @@ Ajouter.addEventListener("click", () => {
     li.style.fontWeight = 'bold'
     li.style.backgroundColor = "lightgray"
 
-    // BTN CHECK
+    // DEBUT BTN CHECK
 
     let div = document.createElement('div')
     li.appendChild(div)
@@ -58,7 +58,7 @@ Ajouter.addEventListener("click", () => {
     //  FIN DE BTN CHECK
     
 
-    //  BTN EDIT
+    // DEBUT  BTN EDIT
     let btne = document.createElement('i')
     btne.setAttribute("class", "fas fa-2x fa-edit")
     btne.style.marginLeft = '50px'
@@ -76,27 +76,27 @@ Ajouter.addEventListener("click", () => {
       btns.style.color = "green"
       btns.style.marginRight = "650px"
       li.appendChild(btns)
+
       // click sur le save => rajoute les 3 bouton de base check,edit,delete
       btns.addEventListener("click", () => {
         li.innerText = input2.value
         li.append(btni, btne, btnd)
-
         
       })
-
-
-      
     })
-
     // FIN BTN EDIT
 
-    
+    // DEBUT BTN DELETE
     let btnd = document.createElement('i')
     btnd.setAttribute("class", "far fa-2x fa-trash-alt")
     btnd.style.marginLeft = '50px'
     btnd.style.color = 'red'
     div.appendChild(btnd)
-    //  fin des logo boutton
+    btnd.addEventListener("click", () => {
+      li.remove()
+    })
+
+    // FIN BTN DELETE
 
   }
 })
