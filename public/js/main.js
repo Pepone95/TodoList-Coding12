@@ -1,62 +1,53 @@
 let body = document.querySelector("body")
 let input1 = document.getElementsByClassName("form-control")[0]
-
+let form = document.getElementsByClassName("row")[0]
+form.setAttribute("onsubmit", "return false")
 // Boutton ajouter
-
 let Ajouter = document.getElementsByClassName("btn")[0]
 Ajouter.style.backgroundColor = 'turquoise'
 Ajouter.style.marginRight = '200px'
-
 // 4 boutton
-
 let buttonTodo = document.getElementsByClassName("btn")[1]
-
 let buttonDone = document.getElementsByClassName("btn")[2]
-
 let supprimer = document.getElementsByClassName("btn")[3]
 let buttonAll = document.getElementsByClassName("btn")[4]
-
 let boxBody = document.getElementsByClassName("box-body")[0]
-
 let ul = document.getElementById("list all")
+let msgErreur = document.getElementsByTagName("span")[0]
 boxBody.appendChild(ul)
-
 Ajouter.addEventListener("click", () => {
-  if(input1.value !== ""){
+  if (input1.value !== "") {
+    msgErreur.classList.add("display-none")
     let li = document.createElement("li")
     ul.appendChild(li)
-    li.innerText = input1.value
+    let p = document.createElement('span')
+    let span = p
+    li.appendChild(p)
+    p.innerText = input1.value
     input1.value = ""
-
     // Les Li
-
-    li.style.display = 'flex'
     li.style.alignItems = 'center'
-    li.style.justifyContent = "space-between"
     li.style.padding = '25px'
     li.style.fontWeight = 'bold'
     li.style.backgroundColor = "lightgray"
 
     // DEBUT BTN CHECK
-
+    
     let div = document.createElement('div')
+    div.setAttribute("class", "float-right")
     li.appendChild(div)
-
     let btni = document.createElement('i')
     btni.setAttribute("class", "far fa-2x fa-check-circle")
     btni.style.color = 'blue'
     div.appendChild(btni)
-    
-    
     btni.addEventListener("click", () => {
-      if (li.style.backgroundColor == "green"){
+      if (li.style.backgroundColor == "green") {
         li.style.backgroundColor = "lightgray"
       } else {
         li.style.backgroundColor = "green"
       }
     })
     //  FIN DE BTN CHECK
-    
 
     // DEBUT  BTN EDIT
     let btne = document.createElement('i')
@@ -65,27 +56,35 @@ Ajouter.addEventListener("click", () => {
     btne.style.color = 'yellow'
     div.appendChild(btne)
 
+    // ------------------------------------------------------------------------
     btne.addEventListener("click", () => {
-      btni.remove()
-      btnd.remove()
-      btne.remove()
+      span.setAttribute("class", "display-none")
+      div.style.display = "none"
       let input2 = document.createElement("input")
-      li.appendChild(input2)
+      input2.placeholder = span.innerText
+      input2.style.display = ""
       let btns = document.createElement('i')
       btns.setAttribute("class", "fas fa-2x fa-save")
       btns.style.color = "green"
       btns.style.marginRight = "650px"
-      li.appendChild(btns)
+      li.append(input2, btns)
+      li.classList.add("d-flex")
 
       // click sur le save => rajoute les 3 bouton de base check,edit,delete
       btns.addEventListener("click", () => {
-        li.innerText = input2.value
-        li.append(btni, btne, btnd)
-        
+        span.classList.remove("display-none")
+        li.classList.remove("d-flex")
+        li.removeChild(btns)
+        div.style.display = ""
+        span.innerText = input2.value
+        span.style.display = ""
+
+        div.append(btni, btne, btnd)
+        // div.setAttribute("class", "float-right")
+        input2.style.display = "none"
       })
     })
     // FIN BTN EDIT
-
     // DEBUT BTN DELETE
     let btnd = document.createElement('i')
     btnd.setAttribute("class", "far fa-2x fa-trash-alt")
@@ -95,8 +94,38 @@ Ajouter.addEventListener("click", () => {
     btnd.addEventListener("click", () => {
       li.remove()
     })
-
     // FIN BTN DELETE
+
+    // LES FILTRES
+    // variables
+    let aFaire = document.getElementsByTagName('button')[1]
+    let fait = document.getElementsByTagName('button')[2]
+    let tout = document.getElementsByTagName('button')[3]
+
+    // BOUTON A FAIRE
+    aFaire.addEventListener("click", () => {
+      if (li.style.backgroundColor !== "green") {
+        li.style.display = ""
+        div.setAttribute("class", "float-right")
+      } else {
+        li.style.display = "none"
+      }
+    })
+    // BOUTON FAIT
+    fait.addEventListener("click", () => {
+      if (li.style.backgroundColor != "green") {
+        li.style.display = "none"
+      } else {
+        li.style.display = ""
+      }
+    })
+    // BOUTON ALL
+    tout.addEventListener("click", () => {
+      li.style.display = ""
+    })
+  } else {
+    msgErreur.classList.remove("display-none")
+    console.log("Bonjour");
 
   }
 })
