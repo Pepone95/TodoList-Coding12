@@ -2,10 +2,13 @@ let body = document.querySelector("body")
 let input1 = document.getElementsByClassName("form-control")[0]
 let form = document.getElementsByClassName("row")[0]
 form.setAttribute("onsubmit", "return false")
+
 // Boutton ajouter
 let Ajouter = document.getElementsByClassName("btn")[0]
 Ajouter.style.backgroundColor = 'turquoise'
 Ajouter.style.marginRight = '200px'
+
+
 // 4 boutton
 let buttonTodo = document.getElementsByClassName("btn")[1]
 let buttonDone = document.getElementsByClassName("btn")[2]
@@ -25,14 +28,16 @@ Ajouter.addEventListener("click", () => {
     li.appendChild(p)
     p.innerText = input1.value
     input1.value = ""
+
+
     // Les Li
     li.style.alignItems = 'center'
     li.style.padding = '25px'
     li.style.fontWeight = 'bold'
     li.style.backgroundColor = "lightgray"
 
+
     // DEBUT BTN CHECK
-    
     let div = document.createElement('div')
     div.setAttribute("class", "float-right")
     li.appendChild(div)
@@ -48,6 +53,7 @@ Ajouter.addEventListener("click", () => {
       }
     })
     //  FIN DE BTN CHECK
+
 
     // DEBUT  BTN EDIT
     let btne = document.createElement('i')
@@ -65,10 +71,11 @@ Ajouter.addEventListener("click", () => {
       input2.style.display = ""
       let btns = document.createElement('i')
       btns.setAttribute("class", "fas fa-2x fa-save")
-      btns.style.color = "green"
+      btns.style.color = "red"
       btns.style.marginRight = "650px"
       li.append(input2, btns)
       li.classList.add("d-flex")
+
 
       // click sur le save => rajoute les 3 bouton de base check,edit,delete
       btns.addEventListener("click", () => {
@@ -85,6 +92,8 @@ Ajouter.addEventListener("click", () => {
       })
     })
     // FIN BTN EDIT
+
+
     // DEBUT BTN DELETE
     let btnd = document.createElement('i')
     btnd.setAttribute("class", "far fa-2x fa-trash-alt")
@@ -102,6 +111,7 @@ Ajouter.addEventListener("click", () => {
     let fait = document.getElementsByTagName('button')[2]
     let tout = document.getElementsByTagName('button')[3]
 
+
     // BOUTON A FAIRE
     aFaire.addEventListener("click", () => {
       if (li.style.backgroundColor !== "green") {
@@ -111,6 +121,7 @@ Ajouter.addEventListener("click", () => {
         li.style.display = "none"
       }
     })
+
     // BOUTON FAIT
     fait.addEventListener("click", () => {
       if (li.style.backgroundColor != "green") {
@@ -119,6 +130,7 @@ Ajouter.addEventListener("click", () => {
         li.style.display = ""
       }
     })
+
     // BOUTON ALL
     tout.addEventListener("click", () => {
       li.style.display = ""
